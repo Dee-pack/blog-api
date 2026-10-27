@@ -23,3 +23,18 @@ export function requireAuthor(req, res, next) {
     }
     next();
 }
+
+export function optionalAuthenticate(req, res, next) {
+    const header = req.headers.authorization || "";
+    const [scheme, token] = header.split(" ");
+
+    if (scheme === "Bearer" && token) {
+        try {
+            const payload = jwt.verify(token, process.env.JWT_SECRET);
+            req.user = { id: payload.sub, role: payload.role };
+        } catch {
+            // invalid token: treat as a normal anonymous visitor
+        }
+    }
+    next();
+}
