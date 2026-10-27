@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import authRouter from "./routes/auth.js";
 
 const app = express();
 
@@ -11,9 +12,12 @@ app.get("/health", (req, res) => {
     res.json({ status: "ok" });
 });
 
-// routes will be mounted here
-// app.use("/auth", authRouter);
-// app.use("/posts", postsRouter);
+
+app.use("/auth", authRouter);
+
+app.use((req, res) => {
+    res.status(404).json({ error: "Not found" });
+});
 
 app.use((err, req, res, next) => {
     console.error(err);
