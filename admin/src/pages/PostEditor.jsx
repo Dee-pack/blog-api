@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { apiFetch } from "../api.js";
+import CommentsManager from "../components/CommentsManager.jsx";
 
 export default function PostEditor() {
   const { id } = useParams();
@@ -92,6 +93,7 @@ export default function PostEditor() {
           {saving ? "Saving..." : isEdit ? "Save changes" : "Create post"}
         </button>
       </form>
+      {isEdit && <CommentsManager postId={id} />}
     </section>
   );
 }
