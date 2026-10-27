@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { body, param } from "express-validator";
+import commentsRouter from "./comments.js";
 import {
     authenticate,
     requireAuthor,
@@ -16,6 +17,8 @@ import {
 } from "../controllers/postsController.js";
 
 const router = Router();
+
+router.use("/:postId/comments", commentsRouter);
 
 const idParam = param("id").isInt({ min: 1 }).withMessage("Invalid post id");
 
