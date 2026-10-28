@@ -23,8 +23,8 @@ export default function Dashboard() {
       });
       setPosts((prev) =>
         prev.map((p) =>
-          p.id === post.id ? { ...p, published: updated.published } : p
-        )
+          p.id === post.id ? { ...p, published: updated.published } : p,
+        ),
       );
     } catch (err) {
       setError(err.message);
@@ -46,42 +46,67 @@ export default function Dashboard() {
 
   return (
     <section>
-      <h1>Your posts</h1>
-      <Link to="/posts/new">New post</Link>
+      <div className="page-head">
+        <h1>Your posts</h1>
+        <Link to="/posts/new" className="button">
+          New post
+        </Link>
+      </div>
 
       {error && <p role="alert">{error}</p>}
 
       {posts.length === 0 ? (
         <p>No posts yet.</p>
       ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Status</th>
-              <th>Comments</th>
-              <th>Created</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {posts.map((post) => (
-              <tr key={post.id}>
-                <td>{post.title}</td>
-                <td>{post.published ? "Published" : "Draft"}</td>
-                <td>{post._count.comments}</td>
-                <td>{new Date(post.createdAt).toLocaleDateString()}</td>
-                <td>
-                  <button onClick={() => togglePublished(post)}>
-                    {post.published ? "Unpublish" : "Publish"}
-                  </button>
-                  <Link to={`/posts/${post.id}/edit`}>Edit</Link>
-                  <button onClick={() => handleDelete(post)}>Delete</button>
-                </td>
+        <div className="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Comments</th>
+                <th>Created</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {posts.map((post) => (
+                <tr key={post.id}>
+                  <td>{post.title}</td>
+                  <td>
+                    <span
+                      className={post.published ? "badge published" : "badge"}
+                    >
+                      {post.published ? "Published" : "Draft"}
+                    </span>
+                  </td>
+                  <td>{post._count.comments}</td>
+                  <td>{new Date(post.createdAt).toLocaleDateString()}</td>
+                  <td className="actions">
+                    <button
+                      className="secondary"
+                      onClick={() => togglePublished(post)}
+                    >
+                      {post.published ? "Unpublish" : "Publish"}
+                    </button>
+                    <Link
+                      to={`/posts/${post.id}/edit`}
+                      className="button secondary"
+                    >
+                      Edit
+                    </Link>
+                    <button
+                      className="danger"
+                      onClick={() => handleDelete(post)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </section>
   );

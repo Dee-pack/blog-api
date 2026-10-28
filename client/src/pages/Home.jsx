@@ -22,11 +22,11 @@ export default function Home() {
     <section>
       <h1>Latest posts</h1>
       {posts.map((post) => (
-        <article key={post.id}>
+        <article key={post.id} className="post-card">
           <h2>
             <Link to={`/posts/${post.id}`}>{post.title}</Link>
           </h2>
-          <p>
+          <p className="meta">
             By {post.author.username} on{" "}
             {new Date(post.createdAt).toLocaleDateString()} ·{" "}
             {post._count.comments} comments

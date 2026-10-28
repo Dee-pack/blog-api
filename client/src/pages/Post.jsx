@@ -16,10 +16,7 @@ export default function Post() {
   const [commentError, setCommentError] = useState(null);
 
   useEffect(() => {
-    Promise.all([
-      apiFetch(`/posts/${id}`),
-      apiFetch(`/posts/${id}/comments`),
-    ])
+    Promise.all([apiFetch(`/posts/${id}`), apiFetch(`/posts/${id}/comments`)])
       .then(([postData, commentData]) => {
         setPost(postData);
         setComments(commentData);
@@ -50,18 +47,18 @@ export default function Post() {
     <article>
       <Link to="/">← Back to all posts</Link>
       <h1>{post.title}</h1>
-      <p>
+      <p className="meta">
         By {post.author.username} on{" "}
         {new Date(post.createdAt).toLocaleDateString()}
       </p>
-      <div style={{ whiteSpace: "pre-wrap" }}>{post.content}</div>
+      <div className="post-body">{post.content}</div>
 
       <section>
         <h2>Comments ({comments.length})</h2>
 
         {comments.length === 0 && <p>No comments yet.</p>}
         {comments.map((c) => (
-          <div key={c.id}>
+          <div key={c.id} className="comment">
             <strong>{c.user?.username ?? "Deleted user"}</strong>{" "}
             <small>{new Date(c.createdAt).toLocaleString()}</small>
             <p>{c.content}</p>

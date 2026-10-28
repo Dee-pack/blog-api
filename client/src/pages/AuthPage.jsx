@@ -28,7 +28,7 @@ export default function AuthPage({ mode }) {
   }
 
   return (
-    <section>
+    <section className="auth">
       <h1>{isLogin ? "Log in" : "Create an account"}</h1>
       <form onSubmit={handleSubmit}>
         <label>
@@ -49,15 +49,17 @@ export default function AuthPage({ mode }) {
           />
         </label>
         {error && <p role="alert">{error}</p>}
-        <button disabled={submitting}>
-          {isLogin ? "Log in" : "Register"}
-        </button>
+        <button disabled={submitting}>{isLogin ? "Log in" : "Register"}</button>
       </form>
       <p>
         {isLogin ? (
-          <>No account? <Link to="/register">Register</Link></>
+          <>
+            No account? <Link to="/register">Register</Link>
+          </>
         ) : (
-          <>Already registered? <Link to="/login">Log in</Link></>
+          <>
+            Already registered? <Link to="/login">Log in</Link>
+          </>
         )}
       </p>
     </section>

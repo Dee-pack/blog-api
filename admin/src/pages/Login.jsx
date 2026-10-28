@@ -26,7 +26,7 @@ export default function Login() {
   }
 
   return (
-    <section>
+    <section className="auth">
       <h1>Author login</h1>
       <form onSubmit={handleSubmit}>
         <label>

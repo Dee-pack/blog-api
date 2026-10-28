@@ -15,7 +15,9 @@ export default function App() {
         {user && (
           <nav>
             <span>{user.username}</span>
-            <button onClick={logout}>Log out</button>
+            <button className="secondary" onClick={logout}>
+              Log out
+            </button>
           </nav>
         )}
       </header>

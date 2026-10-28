@@ -63,7 +63,7 @@ export default function CommentsManager({ postId }) {
       {comments.length === 0 && <p>No comments on this post.</p>}
 
       {comments.map((comment) => (
-        <div key={comment.id}>
+        <div key={comment.id} className="comment">
           <strong>{comment.user?.username ?? "Deleted user"}</strong>{" "}
           <small>{new Date(comment.createdAt).toLocaleString()}</small>
           {editingId === comment.id ? (
@@ -75,13 +75,19 @@ export default function CommentsManager({ postId }) {
                 rows={3}
               />
               <button onClick={() => saveEdit(comment)}>Save</button>
-              <button onClick={cancelEdit}>Cancel</button>
+              <button className="secondary" onClick={cancelEdit}>
+                Cancel
+              </button>
             </>
           ) : (
             <>
               <p>{comment.content}</p>
-              <button onClick={() => startEdit(comment)}>Edit</button>
-              <button onClick={() => handleDelete(comment)}>Delete</button>
+              <button className="secondary" onClick={() => startEdit(comment)}>
+                Edit
+              </button>
+              <button className="danger" onClick={() => handleDelete(comment)}>
+                Delete
+              </button>
             </>
           )}
         </div>
