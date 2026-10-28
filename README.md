@@ -4,9 +4,9 @@ A blog built as an API-only backend with two separate front-ends: a public site 
 
 ## Live demo
 
-- Reader site: <url>
-- Admin site: <url>
-- API: <url>
+- [Reader site:](https://client-side-qk8f.onrender.com)
+- [Admin site:](https://admin-2uhf.onrender.com)
+- [API:](https://blog-api-00xb.onrender.com)
 
 ## Structure
 
