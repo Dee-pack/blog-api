@@ -6,7 +6,13 @@ import postsRouter from "./routes/posts.js";
 
 const app = express();
 
-app.use(cors());
+const allowedOrigins = (
+    process.env.CORS_ORIGINS || "http://localhost:5173,http://localhost:5174"
+)
+    .split(",")
+    .map((origin) => origin.trim());
+
+app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 
 app.get("/health", (req, res) => {
